@@ -1,17 +1,23 @@
 {
-  "name": "Fusión Stereo",
+  "name": "Radio Fusión Stereo",
   "short_name": "Fusión Stereo",
-  "description": "Emisora virtual Fusión Stereo. Señal desde Medellín, Colombia.",
-  "lang": "es-CO",
+  "description": "Radio Fusión Stereo - Radio online en vivo.",
+  "lang": "es",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#10001f",
-  "theme_color": "#6500d1",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp",
+      "src": "https://i.ibb.co/LhDPnt7b/N.png",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.ibb.co/LhDPnt7b/N.png",
       "sizes": "512x512",
       "type": "image/webp",
       "purpose": "any maskable"
