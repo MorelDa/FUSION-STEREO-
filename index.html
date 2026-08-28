@@ -223,7 +223,7 @@
     }
 
     .install-btn{
-      display:none;
+      display:flex;
       align-items:center;
       gap:8px;
       padding:9px 13px;
@@ -232,6 +232,98 @@
       background:rgba(101,0,209,.5);
       border:1px solid rgba(255,255,255,.18);
       cursor:pointer;
+    }
+
+
+    /* PORTADA + VINILO — composición del HTML original */
+    .album-art-wrapper{
+      position:relative;
+      width:180px;
+      height:180px;
+      aspect-ratio:1;
+    }
+
+    .vinyl-record{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at center,rgba(255,255,255,.08) 0 9%,transparent 10%),
+        repeating-radial-gradient(circle at center,#080808 0 2px,#171717 3px 5px);
+      box-shadow:0 12px 35px rgba(0,0,0,.62);
+      border:2px solid #080808;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      will-change:transform;
+      transition:transform .8s cubic-bezier(.175,.885,.32,1.275);
+      z-index:1;
+    }
+
+    .vinyl-record::before{
+      content:"";
+      position:absolute;
+      inset:7%;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:inset 0 0 30px rgba(255,255,255,.08);
+    }
+
+    .vinyl-center-label{
+      width:30%;
+      height:30%;
+      border-radius:50%;
+      background:#fff;
+      border:3px solid var(--cyan);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+      position:relative;
+      z-index:2;
+    }
+
+    .vinyl-center-label img{
+      width:76%;
+      height:76%;
+      object-fit:contain;
+    }
+
+    .album-cover{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 12px 35px rgba(0,0,0,.62);
+      border:1px solid rgba(255,255,255,.22);
+      z-index:2;
+      background:#1e1e22;
+      transition:transform .8s cubic-bezier(.175,.885,.32,1.275);
+    }
+
+    .album-cover img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .app-container.playing .vinyl-record{
+      transform:translateX(75px);
+      animation:spinVinyl 3s linear infinite;
+    }
+
+    .app-container.playing .album-cover{
+      transform:translateX(0);
+    }
+
+    @keyframes spinVinyl{
+      from{transform:translateX(75px) rotate(0deg)}
+      to{transform:translateX(75px) rotate(360deg)}
     }
 
     /* Centro */
@@ -551,7 +643,12 @@
       .brand-copy strong{font-size:15px}
       .brand-copy span{font-size:11px}
 
-      .logo-stage{width:340px}
+      .album-art-wrapper{width:280px;height:280px}
+      .app-container.playing .vinyl-record{transform:translateX(110px)}
+      @keyframes spinVinyl{
+        from{transform:translateX(110px) rotate(0deg)}
+        to{transform:translateX(110px) rotate(360deg)}
+      }
       .station-name h1{font-size:44px}
 
       .player-info{min-height:76px}
@@ -607,7 +704,7 @@
             <span class="live-dot"></span>
             EN VIVO
           </div>
-          <button class="install-btn" id="installBtn" type="button" aria-label="Instalar Fusión Stereo">
+          <button class="install-btn" id="installBtn" type="button" aria-label="Instalar Fusión Stereo" style="display:flex;">
             <i class="fa-solid fa-download"></i>
             <span>Instalar</span>
           </button>
@@ -616,10 +713,13 @@
 
       <div class="center-content">
         <div class="station">
-          <div class="logo-stage">
-            <div class="logo-halo"></div>
-            <div class="logo-ring"></div>
-            <div class="logo-disc">
+          <div class="album-art-wrapper">
+            <div class="vinyl-record" aria-hidden="true">
+              <div class="vinyl-center-label">
+                <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="">
+              </div>
+            </div>
+            <div class="album-cover">
               <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
             </div>
           </div>
@@ -653,20 +753,26 @@
         </div>
 
         <div class="action-controls">
-          <a class="social-btn" href="https://wa.me/573117679576" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Fusión Stereo" title="WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i>
-          </a>
-
           <button class="play-btn" id="playBtn" type="button" aria-label="Reproducir Fusión Stereo" aria-pressed="false">
             <i class="fa-solid fa-play" id="playIcon"></i>
           </button>
 
-          <a class="social-btn" href="https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram Fusión Stereo" title="Instagram">
+          <a class="social-btn" href="https://wa.me/573117679576" target="_blank" rel="noopener noreferrer"
+             aria-label="WhatsApp Fusión Stereo" title="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+
+          <a class="social-btn" href="https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg=="
+             target="_blank" rel="noopener noreferrer" aria-label="Instagram Fusión Stereo" title="Instagram">
             <i class="fa-brands fa-instagram"></i>
           </a>
+
+          <button class="social-btn" id="shareBtn" type="button" aria-label="Compartir Fusión Stereo" title="Compartir">
+            <i class="fa-solid fa-share-nodes"></i>
+          </button>
         </div>
 
-        <div class="help-text">Fusión Stereo · La música que nos une</div>
+        <div class="help-text">Fusión Stereo · La música que nos une</div>Fusión Stereo · La música que nos une</div>
       </div>
     </section>
 
@@ -682,7 +788,7 @@
       const audio = new Audio();
       audio.src = STREAM_URL;
       audio.preload = "none";
-      audio.autoplay = false;
+      audio.autoplay = false;\n      // IMPORTANTE: no iniciar audio automáticamente al entrar.
       audio.controls = false;
 
       const main = document.getElementById("mainContainer");
@@ -862,7 +968,34 @@
         if (playing) setPlayingState(false);
       });
 
-      // PWA: mostrar botón solo cuando el navegador ofrezca instalación.
+
+      const shareBtn = document.getElementById("shareBtn");
+
+      shareBtn.addEventListener("click", async () => {
+        const shareData = {
+          title: "Fusión Stereo",
+          text: "Escucha Fusión Stereo — emisora virtual con señal desde Medellín, Colombia.",
+          url: window.location.href
+        };
+
+        try {
+          if (navigator.share) {
+            await navigator.share(shareData);
+          } else if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(window.location.href);
+            showToast("Enlace de Fusión Stereo copiado.");
+          } else {
+            showToast("Copia el enlace de esta página para compartir Fusión Stereo.");
+          }
+        } catch (error) {
+          if (error && error.name !== "AbortError") {
+            showToast("No fue posible abrir el menú de compartir.");
+          }
+        }
+      });
+
+      // PWA: el botón queda disponible en el encabezado.
+      // El navegador mostrará su instalador cuando beforeinstallprompt esté disponible.
       window.addEventListener("beforeinstallprompt", (event) => {
         event.preventDefault();
         deferredInstallPrompt = event;
@@ -870,7 +1003,10 @@
       });
 
       installBtn.addEventListener("click", async () => {
-        if (!deferredInstallPrompt) return;
+        if (!deferredInstallPrompt) {
+        showToast("La instalación se ofrece desde el navegador cuando esta página cumple los requisitos de PWA.");
+        return;
+      }
 
         deferredInstallPrompt.prompt();
         const result = await deferredInstallPrompt.userChoice;
