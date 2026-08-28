@@ -13,22 +13,24 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: #46098e;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+   background: #46098e !important;
+   color-scheme: dark;
 }
 
 /* CONTENEDOR PRINCIPAL TOTALMENTE RESPONSIVE (100% PANTALLA PC Y MÓVIL) */
 .app-container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+   position: relative;
+   width: 100vw;
+   height: 100vh;
+   height: 100dvh;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   background: #46098e;
 }
 
 /* VIDEO DE FONDO INTEGRADO */
@@ -68,6 +70,7 @@ html, body {
    justify-content: center;
    align-items: center;
    overflow: hidden;
+   border: 1.5px solid rgba(255,255,255,.55);
    flex-shrink: 0;
 }
 
@@ -79,7 +82,6 @@ html, body {
 }
 
 .pwa-action-btn {
-   color: #ffffff;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -137,7 +139,7 @@ html, body {
   height: 30%;
   border-radius: 50%;
   background: #ffffff;
-  border: 2px solid #ffffff;
+  border: 2px solid #46098e;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,7 +204,7 @@ html, body {
   flex: 1;
   height: 10%;
   border-radius: 3px 3px 0 0;
-  background: linear-gradient(to top, #ffffff, #ffffff);
+  background: linear-gradient(to top, #46098e, #46098e);
   transition: height 0.05s ease;
 }
 
@@ -295,7 +297,7 @@ html, body {
   justify-content: center;
   align-items: center;
   font-size: 26px;
-  color: #ffffff;
+  color: #46098e;
   border: none;
   box-shadow: 0 6px 20px rgba(0,0,0,0.4);
   cursor: pointer;
@@ -307,7 +309,6 @@ html, body {
 }
 
 .btn-action-secondary {
-   color: #ffffff;
   width: 50px;
   height: 50px;
   background: rgba(17, 17, 19, 0.85);
@@ -359,46 +360,46 @@ html, body {
   }
 
   .btn-action-secondary {
-   color: #ffffff;
     width: 58px;
     height: 58px;
     font-size: 20px;
   }
 }
 
-.app-container{ background: #46098e; }
-
-
-:root {
-  color-scheme: dark;
-  --radio-purple: #46098e;
+.inline-icon {
+   width: 20px;
+   height: 20px;
+   display: block;
+   flex: 0 0 auto;
 }
-html, body {
-  background: var(--radio-purple) !important;
-  overscroll-behavior: none;
+.pwa-action-btn .inline-icon { width: 16px; height: 16px; }
+.btn-action-secondary .inline-icon { width: 22px; height: 22px; }
+.btn-action-play {
+   background: #46098e !important;
+   color: #ffffff !important;
 }
-@media (display-mode: standalone) {
-  html, body {
-    background: var(--radio-purple) !important;
-  }
-}
+.btn-action-play i { color: #ffffff !important; }
 
 </style>
 
 <meta name="theme-color" content="#46098e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="msapplication-TileColor" content="#46098e">
 <meta name="description" content="Radio Fusión Stereo - Radio online en vivo.">
 <meta property="og:title" content="RADIO FUSIÓN STEREO">
 <meta property="og:description" content="Radio Fusión Stereo - Radio online en vivo.">
 <meta property="og:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+<meta property="og:image:url" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+<meta property="og:image:secure_url" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://MorelDa.github.io/nuevo-pwa-para-wilmer/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="RADIO FUSIÓN STEREO">
 <meta name="twitter:description" content="Radio Fusión Stereo - Radio online en vivo.">
 <meta name="twitter:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
-<!-- FAVICON: LOGO REAL DE RADIO FUSIÓN STEREO -->
-<link rel="icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" type="image/webp">
-<link rel="shortcut icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" type="image/webp">
+<link rel="icon" type="image/webp" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+<link rel="shortcut icon" type="image/webp" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
 <link rel="apple-touch-icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
 <link rel="manifest" href="./manifest.json">
 
@@ -418,10 +419,16 @@ html, body {
       <div class="top-logo">
         <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Logo">
       </div>
-      <button class="pwa-action-btn" id="pwaBtn">
-        <i class="fa-solid fa-download"></i>
-        <span>Instalar App</span>
-      </button>
+      <div style="display:flex;gap:8px;align-items:center;">
+       <button class="pwa-action-btn" id="shareBtn" type="button" aria-label="Compartir">
+         <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.3 10.8 7.4-4.5M8.3 13.2l7.4 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+         <span>Compartir</span>
+       </button>
+       <button class="pwa-action-btn" id="pwaBtn" type="button" aria-label="Instalar App">
+         <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+         <span>Instalar App</span>
+       </button>
+       </div>
     </div>
 
     <!-- SECCIÓN CENTRAL CENTRADA: CARÁTULA Y VINILO -->
@@ -463,9 +470,9 @@ html, body {
         <button class="btn-action-secondary" onclick="window.open('https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg%3D%3D')">
           <i class="fa-brands fa-instagram" aria-hidden="true"></i>
         </button>
-        <button class="btn-action-secondary" onclick="window.open('https://www.facebook.com/')">
-          <i class="fa-brands fa-facebook"></i>
-        </button>
+        <button class="btn-action-secondary" id="shareBtnBottom" type="button" aria-label="Compartir" title="Compartir">
+           <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.3 10.8 7.4-4.5M8.3 13.2l7.4 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+         </button>
       </div>
     </div>
 
@@ -565,41 +572,47 @@ animate();
 </script>
 
 <script>
+/* RADIO FUSIÓN STEREO — PWA */
 let deferredInstallPrompt = null;
 const pwaBtn = document.getElementById("pwaBtn");
 
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredInstallPrompt = e;
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
 });
 
-pwaBtn.addEventListener("click", async () => {
+pwaBtn?.addEventListener("click", async () => {
   if (deferredInstallPrompt) {
     deferredInstallPrompt.prompt();
-    await deferredInstallPrompt.userChoice;
+    try { await deferredInstallPrompt.userChoice; } catch(e) {}
     deferredInstallPrompt = null;
+  } else if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
+    alert("Radio Fusión Stereo ya está instalada.");
   } else {
-    alert("Si no aparece la instalación automática, abre el menú del navegador y pulsa «Instalar aplicación» o «Añadir a pantalla de inicio».");
+    alert("Abre el menú del navegador y selecciona «Instalar aplicación» o «Añadir a pantalla de inicio».");
   }
 });
 
-async function compartirRadio() {
+async function compartirRadioFusion() {
   const data = {
     title: "RADIO FUSIÓN STEREO",
     text: "Escucha Radio Fusión Stereo en vivo.",
-    url: location.href
+    url: window.location.href
   };
   try {
     if (navigator.share) {
       await navigator.share(data);
-    } else {
-      await navigator.clipboard.writeText(location.href);
+    } else if (navigator.clipboard) {
+      await navigator.clipboard.writeText(window.location.href);
       alert("Enlace de Radio Fusión Stereo copiado.");
+    } else {
+      prompt("Copia este enlace para compartir Radio Fusión Stereo:", window.location.href);
     }
   } catch(e) {}
 }
-document.getElementById("shareBtn")?.addEventListener("click", compartirRadio);
-document.getElementById("shareBtnBottom")?.addEventListener("click", compartirRadio);
+
+document.getElementById("shareBtn")?.addEventListener("click", compartirRadioFusion);
+document.getElementById("shareBtnBottom")?.addEventListener("click", compartirRadioFusion);
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js"));
