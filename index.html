@@ -587,7 +587,32 @@ document.getElementById("shareBtn")?.addEventListener("click", compartirRadio);
 document.getElementById("shareBtnBottom")?.addEventListener("click", compartirRadio);
 
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js"));
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").then(reg => {
+      // Revisa si hay una versión nueva publicada
+      reg.addEventListener("updatefound", () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener("statechange", () => {
+          if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+            newWorker.postMessage({ type: "SKIP_WAITING" });
+          }
+        });
+      });
+      // Vuelve a comprobar actualizaciones cada vez que se abre/enfoca la app
+      reg.update();
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") reg.update();
+      });
+    });
+
+    // Cuando el nuevo service worker toma el control, recarga la página una vez
+    let refreshed = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshed) return;
+      refreshed = true;
+      window.location.reload();
+    });
+  });
 }
 </script>
 
