@@ -16,6 +16,7 @@ Proyecto adaptado desde el ZIP original para:
 - Favicon, iconos PWA, portada, avatar y metadatos sociales usan el logo de Fusión Stereo.
 - Colores adaptados al morado del logo.
 - Botón central Play/Pausa en el color de marca.
+- Se restauró el vinilo giratorio del proyecto original: gira detrás de la portada al reproducir y se detiene al pausar.
 - Onda visual en blanco.
 - Solo botones sociales de Instagram y WhatsApp.
 - Se eliminó el análisis Web Audio del proyecto original para evitar problemas de CORS que pueden afectar la reproducción.
