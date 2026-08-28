@@ -1,0 +1,20 @@
+{
+  "name": "Fusión Stereo",
+  "short_name": "Fusión Stereo",
+  "description": "Emisora virtual Fusión Stereo. Señal desde Medellín, Colombia.",
+  "lang": "es-CO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#10001f",
+  "theme_color": "#6500d1",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,422 +1,901 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
-<title>Fusión Stereo — En Vivo</title>
-<meta name="description" content="Fusión Stereo — Emisora Virtual. Señal desde Medellín, Colombia. Escúchanos en vivo.">
-<meta name="theme-color" content="#6514d8">
-<meta name="msapplication-TileColor" content="#6514d8">
-<meta name="application-name" content="Fusión Stereo">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Fusión Stereo">
+  <title>Fusión Stereo — Emisora Virtual en Vivo</title>
+  <meta name="description" content="Fusión Stereo — emisora virtual con señal desde Medellín, Colombia. Escúchanos en vivo 24/7.">
+  <meta name="theme-color" content="#6500d1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Fusión Stereo">
 
-<!-- Open Graph / redes sociales -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fusión Stereo — En Vivo">
-<meta property="og:description" content="🎶 Fusión Stereo — Emisora Virtual. Señal desde Medellín, Colombia. Escúchanos en vivo.">
-<meta property="og:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
-<meta property="og:image:secure_url" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
-<meta property="og:image:type" content="image/webp">
-<meta property="og:image:width" content="512">
-<meta property="og:image:height" content="512">
-<meta property="og:url" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:title" content="Fusión Stereo — En Vivo">
+  <meta property="og:description" content="Emisora virtual. Señal desde Medellín, Colombia. Escucha Fusión Stereo en vivo.">
+  <meta property="og:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+  <meta property="og:image:alt" content="Logo de Fusión Stereo">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Fusión Stereo">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Fusión Stereo — En Vivo">
-<meta name="twitter:description" content="🎶 Emisora Virtual — Señal desde Medellín, Colombia.">
-<meta name="twitter:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fusión Stereo — En Vivo">
+  <meta name="twitter:description" content="Emisora virtual. Señal desde Medellín, Colombia.">
+  <meta name="twitter:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
 
-<!-- Favicon / iconos: mismo logo -->
-<link rel="icon" type="image/webp" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
-<link rel="apple-touch-icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
-<link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" type="image/webp">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+  <link rel="manifest" href="./manifest.json">
 
-<link rel="preconnect" href="https://i.ibb.co" crossorigin>
-<link rel="preconnect" href="https://radios.voiparkas.com" crossorigin>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden;background-color:#0d0d0f}
-.app-container{position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
-.player-video-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:saturate(.9)}
-.pink-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(10,10,12,.60) 60%,rgba(10,10,12,.94) 100%);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:2}
-.ui-layer{position:relative;z-index:3;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 15px) 20px calc(env(safe-area-inset-bottom) + 20px) 20px}
-.header-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1200px;margin:0 auto}
-.top-logo{width:48px;height:48px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:50%;display:flex;justify-content:center;align-items:center;border:1.5px solid rgba(255,255,255,.35);overflow:hidden}
-.top-logo img{width:100%;height:100%;object-fit:cover;display:block}
-.pwa-action-btn{background:rgba(101,20,216,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.35);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer}
-.pwa-action-btn[hidden]{display:none}
-.center-content{display:flex;justify-content:center;align-items:center;flex:1;position:relative;width:100%}
-.album-art-wrapper{position:relative;width:180px;height:180px;aspect-ratio:1/1}
-.vinyl-record{position:absolute;top:0;left:0;width:100%;height:100%;aspect-ratio:1/1;border-radius:50%;background:url('https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp') no-repeat center center/cover;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:transform .8s cubic-bezier(.175,.885,.32,1.275);border:2px solid #000;display:flex;justify-content:center;align-items:center;will-change:transform}
-.vinyl-center-label{width:32%;height:32%;border-radius:50%;background:transparent;border:none;display:flex;justify-content:center;align-items:center;overflow:hidden;z-index:5}
-.vinyl-center-label img{width:100%;height:100%;object-fit:cover;display:block}
-.album-cover{position:absolute;top:0;left:0;width:100%;height:100%;aspect-ratio:1/1;border-radius:16px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);z-index:2;background:#1e1e22}
-.album-cover img{width:100%;height:100%;object-fit:cover;display:block}
-.app-container.playing .album-cover{transform:translateX(75px)}
-.app-container.playing .vinyl-record{transform:translateX(75px);animation:spinVinyl 3s linear infinite}
-@keyframes spinVinyl{from{transform:translateX(75px) rotate(0deg)}to{transform:translateX(75px) rotate(360deg)}}
-.audio-wave-container{position:absolute;bottom:0;left:0;width:100%;height:35%;display:flex;align-items:flex-end;justify-content:space-between;gap:2px;z-index:2;pointer-events:none;padding:0}
-.wave-bar{flex:1;height:10%;border-radius:3px 3px 0 0;background:#fff;box-shadow:0 0 8px rgba(255,255,255,.35);transition:height .05s ease}
-.bottom-controls{width:100%;max-width:480px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:15px}
-.black-player-bar{width:100%;height:65px;background:rgba(17,17,19,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:35px;display:flex;align-items:center;padding:0 16px 0 10px;border:1px solid rgba(255,255,255,.15);box-shadow:0 8px 25px rgba(0,0,0,.5)}
-.station-avatar{width:45px;height:45px;background:#fff;border-radius:50%;margin-right:12px;overflow:hidden;flex-shrink:0}
-.station-avatar img{width:100%;height:100%;object-fit:cover}
-.track-text{flex:1;overflow:hidden}
-.track-text .title{font-weight:700;font-size:14px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.track-text .subtitle{color:rgba(255,255,255,.7);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.spectators-tag{background:#fff;color:#000;font-size:10px;font-weight:800;padding:5px 10px;border-radius:12px;display:flex;align-items:center;gap:5px}
-.action-controls{display:flex;width:100%;justify-content:space-around;align-items:center}
-.btn-action-play{width:68px;height:68px;background:#fff;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:26px;color:#6514d8;border:none;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s ease}
-.btn-action-play:active{transform:scale(.92)}
-.btn-action-secondary{width:50px;height:50px;background:rgba(17,17,19,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:50%;color:#fff;display:flex;justify-content:center;align-items:center;font-size:18px;border:1px solid rgba(255,255,255,.15);cursor:pointer}
-.btn-action-secondary .fa-whatsapp{color:#25D366}
-.btn-action-secondary .fa-instagram{color:#fff}
-@media (min-width:768px){
-.album-art-wrapper{width:280px;height:280px}
-.app-container.playing .album-cover{transform:translateX(110px)}
-.app-container.playing .vinyl-record{transform:translateX(110px)}
-@keyframes spinVinyl{from{transform:translateX(110px) rotate(0deg)}to{transform:translateX(110px) rotate(360deg)}}
-.black-player-bar{height:75px}
-.station-avatar{width:52px;height:52px}
-.track-text .title{font-size:16px}
-.btn-action-play{width:78px;height:78px;font-size:30px}
-.btn-action-secondary{width:58px;height:58px;font-size:20px}
-}
-@media(max-height:650px){.album-art-wrapper{width:155px;height:155px}}
-</style>
+  <style>
+    :root{
+      --purple:#6500d1;
+      --purple-dark:#26004f;
+      --purple-deep:#10001f;
+      --cyan:#22d3ee;
+      --cyan-bright:#67e8f9;
+      --white:#fff;
+      --glass:rgba(13,8,25,.72);
+      --glass-border:rgba(255,255,255,.16);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    html,body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:var(--purple-deep);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      color:#fff;
+    }
+
+    button,a{font:inherit}
+    button{border:0}
+    a{text-decoration:none;color:inherit}
+
+    .app-container{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      height:100dvh;
+      overflow:hidden;
+      isolation:isolate;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(101,0,209,.65), transparent 38%),
+        radial-gradient(circle at 10% 90%, rgba(34,211,238,.18), transparent 30%),
+        linear-gradient(145deg,#10001f 0%,#250044 46%,#08000f 100%);
+    }
+
+    /* Fondo decorativo */
+    .bg-glow{
+      position:absolute;
+      inset:-25%;
+      z-index:-3;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(101,0,209,.32), transparent 25%),
+        radial-gradient(circle at 80% 70%, rgba(34,211,238,.10), transparent 24%),
+        radial-gradient(circle at 15% 65%, rgba(255,90,0,.08), transparent 22%);
+      filter:blur(50px);
+      animation:ambient 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambient{
+      from{transform:scale(1) rotate(0deg)}
+      to{transform:scale(1.08) rotate(3deg)}
+    }
+
+    .grid{
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      opacity:.16;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+      background-size:45px 45px;
+      mask-image:linear-gradient(to bottom,transparent,black 20%,black 80%,transparent);
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:linear-gradient(180deg,rgba(9,0,20,.12),rgba(8,0,14,.52) 58%,rgba(5,0,10,.92));
+      backdrop-filter:blur(1px);
+      -webkit-backdrop-filter:blur(1px);
+    }
+
+    .ui-layer{
+      position:relative;
+      z-index:5;
+      width:100%;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:
+        calc(env(safe-area-inset-top) + 14px)
+        clamp(14px,4vw,30px)
+        calc(env(safe-area-inset-bottom) + 18px);
+    }
+
+    /* Cabecera */
+    .header-bar{
+      width:100%;
+      max-width:1180px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mini{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
+    .top-logo{
+      width:52px;
+      height:52px;
+      flex:0 0 52px;
+      border-radius:50%;
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.11);
+      border:1px solid rgba(255,255,255,.25);
+      box-shadow:0 8px 25px rgba(0,0,0,.35),0 0 28px rgba(101,0,209,.38);
+      backdrop-filter:blur(10px);
+    }
+
+    .top-logo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .brand-copy{
+      min-width:0;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-size:14px;
+      letter-spacing:.4px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-copy span{
+      display:block;
+      margin-top:2px;
+      color:rgba(255,255,255,.62);
+      font-size:10px;
+      white-space:nowrap;
+    }
+
+    .live-pill{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      padding:9px 13px;
+      border-radius:999px;
+      color:#fff;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(0,0,0,.18);
+    }
+
+    .live-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#ff3b5c;
+      box-shadow:0 0 0 0 rgba(255,59,92,.65);
+      animation:pulse 1.7s infinite;
+    }
+
+    @keyframes pulse{
+      70%{box-shadow:0 0 0 8px rgba(255,59,92,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,59,92,0)}
+    }
+
+    .install-btn{
+      display:none;
+      align-items:center;
+      gap:8px;
+      padding:9px 13px;
+      border-radius:999px;
+      color:#fff;
+      background:rgba(101,0,209,.5);
+      border:1px solid rgba(255,255,255,.18);
+      cursor:pointer;
+    }
+
+    /* Centro */
+    .center-content{
+      flex:1;
+      min-height:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      width:100%;
+    }
+
+    .station{
+      width:min(78vw,360px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+      transform:translateY(-1vh);
+    }
+
+    .logo-stage{
+      position:relative;
+      width:min(68vw,300px);
+      aspect-ratio:1;
+      display:grid;
+      place-items:center;
+    }
+
+    .logo-halo{
+      position:absolute;
+      inset:7%;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(101,0,209,.55),rgba(101,0,209,.05) 58%,transparent 72%);
+      filter:blur(10px);
+      transform:scale(1.2);
+    }
+
+    .logo-ring{
+      position:absolute;
+      inset:2%;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:inset 0 0 30px rgba(101,0,209,.25),0 0 35px rgba(101,0,209,.2);
+    }
+
+    .logo-disc{
+      position:relative;
+      width:76%;
+      aspect-ratio:1;
+      border-radius:50%;
+      overflow:hidden;
+      border:2px solid rgba(255,255,255,.35);
+      box-shadow:
+        0 22px 55px rgba(0,0,0,.55),
+        0 0 35px rgba(101,0,209,.4);
+      background:#160027;
+    }
+
+    .logo-disc img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .logo-disc::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(145deg,rgba(255,255,255,.12),transparent 42%,rgba(0,0,0,.18));
+      pointer-events:none;
+    }
+
+    .station-name{
+      text-align:center;
+    }
+
+    .station-name h1{
+      font-size:clamp(27px,7vw,42px);
+      line-height:1;
+      font-weight:900;
+      letter-spacing:-1.2px;
+      text-shadow:0 5px 24px rgba(0,0,0,.45);
+    }
+
+    .station-name p{
+      margin-top:8px;
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+    }
+
+    /* Wave */
+    .audio-wave-container{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:31%;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:3px;
+      padding:0;
+      z-index:1;
+      pointer-events:none;
+      opacity:.92;
+      mask-image:linear-gradient(to top,black 0%,black 60%,transparent 100%);
+    }
+
+    .wave-bar{
+      flex:1;
+      min-width:1px;
+      height:8%;
+      border-radius:4px 4px 0 0;
+      background:#fff;
+      box-shadow:0 0 10px rgba(255,255,255,.22);
+      transition:height .08s linear;
+    }
+
+    /* Panel inferior */
+    .bottom-controls{
+      width:100%;
+      max-width:520px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:13px;
+      position:relative;
+      z-index:6;
+    }
+
+    .player-info{
+      width:100%;
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      padding:9px 12px 9px 9px;
+      border-radius:22px;
+      background:var(--glass);
+      border:1px solid var(--glass-border);
+      box-shadow:0 15px 35px rgba(0,0,0,.35);
+      backdrop-filter:blur(15px);
+      -webkit-backdrop-filter:blur(15px);
+    }
+
+    .station-avatar{
+      width:52px;
+      height:52px;
+      flex:0 0 52px;
+      border-radius:16px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 5px 16px rgba(0,0,0,.3);
+    }
+
+    .station-avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .track-text{
+      flex:1;
+      min-width:0;
+    }
+
+    .track-text .title{
+      font-size:15px;
+      font-weight:800;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .track-text .subtitle{
+      margin-top:4px;
+      color:rgba(255,255,255,.62);
+      font-size:11px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .signal-tag{
+      flex-shrink:0;
+      display:flex;
+      align-items:center;
+      gap:5px;
+      padding:7px 9px;
+      border-radius:12px;
+      color:#fff;
+      background:rgba(101,0,209,.5);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:9px;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .action-controls{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:clamp(20px,8vw,48px);
+    }
+
+    .social-btn,
+    .play-btn{
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      cursor:pointer;
+      color:#fff;
+      transition:transform .16s ease,box-shadow .2s ease;
+    }
+
+    .social-btn{
+      width:50px;
+      height:50px;
+      font-size:19px;
+      background:rgba(12,7,22,.82);
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 8px 22px rgba(0,0,0,.32);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+    }
+
+    .social-btn:hover{transform:translateY(-2px)}
+    .social-btn:active,.play-btn:active{transform:scale(.92)}
+
+    .play-btn{
+      width:76px;
+      height:76px;
+      background:#fff;
+      color:var(--cyan);
+      font-size:28px;
+      box-shadow:
+        0 12px 32px rgba(0,0,0,.45),
+        0 0 0 6px rgba(34,211,238,.08),
+        0 0 35px rgba(34,211,238,.2);
+    }
+
+    .play-btn i{
+      margin-left:3px;
+      filter:drop-shadow(0 2px 4px rgba(0,0,0,.18));
+    }
+
+    .help-text{
+      color:rgba(255,255,255,.42);
+      font-size:9px;
+      letter-spacing:.5px;
+      text-align:center;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:calc(env(safe-area-inset-bottom) + 115px);
+      transform:translate(-50%,15px);
+      z-index:30;
+      max-width:min(90vw,420px);
+      padding:11px 15px;
+      border-radius:14px;
+      background:rgba(8,4,15,.92);
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 15px 35px rgba(0,0,0,.35);
+      color:#fff;
+      font-size:12px;
+      text-align:center;
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
+      backdrop-filter:blur(12px);
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    .loading{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+      opacity:0;
+      transition:opacity .2s;
+    }
+
+    .loading.show{opacity:1}
+
+    .spinner{
+      width:22px;
+      height:22px;
+      border:2px solid rgba(255,255,255,.22);
+      border-top-color:var(--cyan);
+      border-radius:50%;
+      animation:spin .7s linear infinite;
+    }
+
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media (min-width:768px){
+      .ui-layer{
+        padding-left:34px;
+        padding-right:34px;
+      }
+
+      .top-logo{width:58px;height:58px;flex-basis:58px}
+      .brand-copy strong{font-size:15px}
+      .brand-copy span{font-size:11px}
+
+      .logo-stage{width:340px}
+      .station-name h1{font-size:44px}
+
+      .player-info{min-height:76px}
+      .station-avatar{width:58px;height:58px;flex-basis:58px}
+      .play-btn{width:84px;height:84px;font-size:30px}
+      .social-btn{width:56px;height:56px}
+    }
+
+    @media (max-height:700px){
+      .logo-stage{width:min(42vh,250px)}
+      .station{gap:9px}
+      .station-name h1{font-size:26px}
+      .station-name p{margin-top:5px;font-size:9px}
+      .player-info{min-height:58px}
+      .station-avatar{width:42px;height:42px;flex-basis:42px;border-radius:12px}
+      .play-btn{width:62px;height:62px;font-size:23px}
+      .social-btn{width:44px;height:44px;font-size:17px}
+      .action-controls{gap:28px}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="app-container" id="mainContainer">
+  <main class="app-container" id="mainContainer">
+    <div class="bg-glow"></div>
+    <div class="grid"></div>
+    <div class="overlay"></div>
 
-    <img class="player-video-bg" src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="" aria-hidden="true">
+    <div class="audio-wave-container" id="wave-container" aria-hidden="true"></div>
 
-    <div class="pink-overlay"></div>
-
-    <div class="audio-wave-container" id="wave-container"></div>
-
-    <div class="ui-layer">
-
-        <div class="header-bar">
-            <div class="top-logo">
-                <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
-            </div>
-
-            <button class="pwa-action-btn" id="pwaBtn" type="button" hidden>
-                <i class="fa-solid fa-download"></i>
-                <span>Instalar App</span>
-            </button>
+    <section class="ui-layer">
+      <header class="header-bar">
+        <div class="brand-mini">
+          <div class="top-logo">
+            <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Logo Fusión Stereo">
+          </div>
+          <div class="brand-copy">
+            <strong>Fusión Stereo</strong>
+            <span>Señal desde Medellín, Colombia</span>
+          </div>
         </div>
 
-        <div class="center-content">
-            <div class="album-art-wrapper">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="live-pill">
+            <span class="live-dot"></span>
+            EN VIVO
+          </div>
+          <button class="install-btn" id="installBtn" type="button" aria-label="Instalar Fusión Stereo">
+            <i class="fa-solid fa-download"></i>
+            <span>Instalar</span>
+          </button>
+        </div>
+      </header>
 
-                <div class="vinyl-record">
-                    <div class="vinyl-center-label">
-                        <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Centro Vinilo">
-                    </div>
-                </div>
-
-                <div class="album-cover">
-                    <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
-                </div>
-
+      <div class="center-content">
+        <div class="station">
+          <div class="logo-stage">
+            <div class="logo-halo"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-disc">
+              <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
             </div>
+          </div>
+
+          <div class="station-name">
+            <h1>Fusión Stereo</h1>
+            <p>Emisora virtual · Medellín, Colombia</p>
+          </div>
         </div>
 
-        <div class="bottom-controls">
+        <div class="loading" id="loading">
+          <div class="spinner"></div>
+        </div>
+      </div>
 
-            <div class="black-player-bar">
-                <div class="station-avatar">
-                    <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
-                </div>
+      <div class="bottom-controls">
+        <div class="player-info">
+          <div class="station-avatar">
+            <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
+          </div>
 
-                <div class="track-text">
-                    <div class="title">FUSIÓN STEREO</div>
-                    <div class="subtitle">Emisora Virtual · Señal desde Medellín, Colombia</div>
-                </div>
+          <div class="track-text">
+            <div class="title">Fusión Stereo</div>
+            <div class="subtitle" id="statusText">Pulsa play para escuchar la señal en vivo</div>
+          </div>
 
-                <div class="spectators-tag">
-                    <i class="fa-solid fa-tower-broadcast"></i>
-                </div>
-            </div>
-
-            <div class="action-controls">
-
-                <button class="btn-action-secondary" type="button" id="instagramBtn" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                </button>
-
-                <button class="btn-action-play" id="playBtn" type="button" aria-label="Reproducir">
-                    <i class="fa-solid fa-play" id="playIcon"></i>
-                </button>
-
-                <button class="btn-action-secondary" type="button" id="whatsappBtn" aria-label="WhatsApp">
-                    <i class="fa-brands fa-whatsapp"></i>
-                </button>
-
-                <button class="btn-action-secondary" type="button" id="shareBtn" aria-label="Compartir">
-                    <i class="fa-solid fa-share-nodes"></i>
-                </button>
-
-            </div>
+          <div class="signal-tag">
+            <i class="fa-solid fa-signal"></i>
+            LIVE
+          </div>
         </div>
 
-    </div>
-</div>
+        <div class="action-controls">
+          <a class="social-btn" href="https://wa.me/573117679576" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Fusión Stereo" title="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
 
-<script>
-const STREAM_URL = "https://radios.voiparkas.com/listen/fusionstereo/radio.mp3";
-const INSTAGRAM_URL = "https://www.instagram.com/emisorafusionstereo?igsi=<script>
-const STREAM_URL = "https://radios.voiparkas.com/listen/fusionstereo/radio.mp3";
-const INSTAGRAM_URL = "https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg==";
-const WHATSAPP_URL = "https://wa.me/573117679576";
+          <button class="play-btn" id="playBtn" type="button" aria-label="Reproducir Fusión Stereo" aria-pressed="false">
+            <i class="fa-solid fa-play" id="playIcon"></i>
+          </button>
 
-const audio = new Audio();
-audio.preload = "none";
-audio.autoplay = false;
-audio.playsInline = true;
+          <a class="social-btn" href="https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram Fusión Stereo" title="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </div>
 
-const playBtn = document.getElementById("playBtn");
-const playIcon = document.getElementById("playIcon");
-const mainContainer = document.getElementById("mainContainer");
-const waveContainer = document.getElementById("wave-container");
-const pwaBtn = document.getElementById("pwaBtn");
-const instagramBtn = document.getElementById("instagramBtn");
-const whatsappBtn = document.getElementById("whatsappBtn");
+        <div class="help-text">Fusión Stereo · La música que nos une</div>
+      </div>
+    </section>
 
-const BARS_COUNT = 32;
-const barElements = [];
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
 
-for(let i=0;i<BARS_COUNT;i++){
-    const bar=document.createElement("div");
-    bar.className="wave-bar";
-    waveContainer.appendChild(bar);
-    barElements.push(bar);
-}
+  <script>
+    (() => {
+      "use strict";
 
-let playing=false;
-let reconnectTimer=null;
-let lastTime=-1;
-let stalledChecks=0;
+      const STREAM_URL = "https://radios.voiparkas.com/listen/fusionstereo/radio.mp3";
 
-function streamSource(){
-    return STREAM_URL + (STREAM_URL.includes("?") ? "&" : "?") + "t=" + Date.now();
-}
+      const audio = new Audio();
+      audio.src = STREAM_URL;
+      audio.preload = "none";
+      audio.autoplay = false;
+      audio.controls = false;
 
-function setPlayingState(value){
-    playing=value;
-    playIcon.className=value ? "fa-solid fa-pause" : "fa-solid fa-play";
-    mainContainer.classList.toggle("playing",value);
-}
+      const main = document.getElementById("mainContainer");
+      const playBtn = document.getElementById("playBtn");
+      const playIcon = document.getElementById("playIcon");
+      const statusText = document.getElementById("statusText");
+      const loading = document.getElementById("loading");
+      const toast = document.getElementById("toast");
+      const waveContainer = document.getElementById("wave-container");
+      const installBtn = document.getElementById("installBtn");
 
-async function connectStream(){
-    clearTimeout(reconnectTimer);
-    try{
-        initAudioAnalyser();
-        if(audioContext && audioContext.state==="suspended"){
-            await audioContext.resume();
+      const BARS = 64;
+      const bars = [];
+      let playing = false;
+      let animationFrame = null;
+      let audioContext = null;
+      let analyser = null;
+      let analyserData = null;
+      let analyserReady = false;
+      let deferredInstallPrompt = null;
+      let toastTimer = null;
+
+      // Crear wave blanca
+      for (let i = 0; i < BARS; i++) {
+        const bar = document.createElement("div");
+        bar.className = "wave-bar";
+        waveContainer.appendChild(bar);
+        bars.push(bar);
+      }
+
+      function showToast(message) {
+        clearTimeout(toastTimer);
+        toast.textContent = message;
+        toast.classList.add("show");
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 3200);
+      }
+
+      function setPlayingState(value) {
+        playing = value;
+        main.classList.toggle("playing", value);
+        playIcon.className = value ? "fa-solid fa-pause" : "fa-solid fa-play";
+        playBtn.setAttribute("aria-pressed", String(value));
+        playBtn.setAttribute("aria-label", value ? "Pausar Fusión Stereo" : "Reproducir Fusión Stereo");
+        statusText.textContent = value
+          ? "Escuchando señal en vivo · Medellín, Colombia"
+          : "Pulsa play para escuchar la señal en vivo";
+      }
+
+      /*
+       * El analizador se intenta activar solo si el navegador y el servidor
+       * permiten analizar el stream. Si el servidor de radio no entrega CORS,
+       * la radio sigue funcionando y el wave pasa automáticamente a una
+       * animación visual de respaldo.
+       */
+      function tryInitAnalyser() {
+        if (analyserReady || analyser) return;
+
+        try {
+          audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = audioContext.createAnalyser();
+          analyser.fftSize = 128;
+          analyser.smoothingTimeConstant = 0.72;
+          analyserData = new Uint8Array(analyser.frequencyBinCount);
+
+          // No se fuerza crossOrigin: esto prioriza que el stream pueda reproducirse.
+          const source = audioContext.createMediaElementSource(audio);
+          source.connect(analyser);
+          analyser.connect(audioContext.destination);
+
+          analyserReady = true;
+        } catch (error) {
+          analyserReady = false;
+          analyser = null;
+          // Fallback visual; no bloquea la reproducción.
         }
-        audio.pause();
-        audio.src=streamSource();
-        audio.load();
-        await audio.play();
-        setPlayingState(true);
-        stalledChecks=0;
-    }catch(error){
-        console.error("Error reproduciendo Fusión Stereo:",error);
-        setPlayingState(false);
-    }
-}
+      }
 
-function scheduleReconnect(){
-    if(!playing) return;
-    clearTimeout(reconnectTimer);
-    reconnectTimer=setTimeout(async()=>{
-        if(!playing) return;
-        try{
-            initAudioAnalyser();
-            if(audioContext && audioContext.state==="suspended"){
-                await audioContext.resume();
-            }
-            audio.pause();
-            audio.src=streamSource();
-            audio.load();
-            await audio.play();
-            stalledChecks=0;
-            setPlayingState(true);
-        }catch(error){
-            stalledChecks++;
-            scheduleReconnect();
-        }
-    },Math.min(12000,1500+(stalledChecks*1200)));
-}
+      function fallbackWave(time) {
+        const active = playing ? 1 : 0;
+        const volume = active ? 1 : .16;
 
-playBtn.addEventListener("click",async()=>{
-    if(!playing){
-        await connectStream();
-    }else{
-        clearTimeout(reconnectTimer);
-        audio.pause();
-        setPlayingState(false);
-    }
-});
-
-audio.addEventListener("playing",()=>{
-    stalledChecks=0;
-    setPlayingState(true);
-});
-audio.addEventListener("waiting",()=>{
-    if(playing) scheduleReconnect();
-});
-audio.addEventListener("stalled",()=>{
-    if(playing) scheduleReconnect();
-});
-audio.addEventListener("error",()=>{
-    if(playing) scheduleReconnect();
-});
-audio.addEventListener("ended",()=>{
-    if(playing) scheduleReconnect();
-});
-
-/* Detección de stream congelado sin Web Audio/CORS */
-setInterval(()=>{
-    if(!playing) return;
-    const current=audio.currentTime;
-    if(Number.isFinite(current) && current===lastTime){
-        stalledChecks++;
-        if(stalledChecks>=2) scheduleReconnect();
-    }else{
-        stalledChecks=0;
-    }
-    lastTime=current;
-},12000);
-
-/* Onda visual: sigue el ritmo real del stream mediante Web Audio.
-   crossOrigin se configura ANTES de asignar el src. Si el servidor no permite
-   CORS, se conserva una animación de respaldo para no romper el reproductor. */
-let audioContext=null;
-let analyser=null;
-let sourceNode=null;
-let dataArray=null;
-let analyserReady=false;
-let fallbackPhase=0;
-
-function initAudioAnalyser(){
-    if(analyserReady) return true;
-
-    try{
-        audio.crossOrigin="anonymous";
-        audioContext=new (window.AudioContext || window.webkitAudioContext)();
-        analyser=audioContext.createAnalyser();
-        analyser.fftSize=128;
-        analyser.smoothingTimeConstant=.72;
-
-        sourceNode=audioContext.createMediaElementSource(audio);
-        sourceNode.connect(analyser);
-        analyser.connect(audioContext.destination);
-
-        dataArray=new Uint8Array(analyser.frequencyBinCount);
-        analyserReady=true;
-        return true;
-    }catch(error){
-        console.warn("Analizador de audio no disponible; usando onda de respaldo.",error);
-        analyserReady=false;
-        return false;
-    }
-}
-
-function animateWave(){
-    if(playing && analyserReady && analyser && dataArray){
-        analyser.getByteFrequencyData(dataArray);
-
-        for(let i=0;i<BARS_COUNT;i++){
-            // Mapea las barras a frecuencias bajas/medias/altas.
-            const ratio=i/(BARS_COUNT-1);
-            const bin=Math.min(dataArray.length-1,Math.floor(ratio*(dataArray.length-1)));
-            const nearby1=dataArray[Math.max(0,bin-1)] || 0;
-            const nearby2=dataArray[bin] || 0;
-            const nearby3=dataArray[Math.min(dataArray.length-1,bin+1)] || 0;
-            const level=(nearby1*.2+nearby2*.6+nearby3*.2)/255;
-
-            const center=1-Math.abs(i-(BARS_COUNT-1)/2)/((BARS_COUNT-1)/2);
-            const height=Math.max(10,Math.min(100,10+level*90*(.62+.38*center)));
-            barElements[i].style.height=height+"%";
-        }
-    }else{
-        // Fallback visual cuando el navegador/servidor no permite analizar CORS.
-        fallbackPhase+=playing?.13:.025;
-        barElements.forEach((bar,index)=>{
-            const center=1-Math.abs(index-(BARS_COUNT-1)/2)/((BARS_COUNT-1)/2);
-            const movement=playing ? (Math.sin(fallbackPhase+index*.65)+1)/2 : 0;
-            bar.style.height=Math.max(10,8+movement*78*center)+"%";
+        bars.forEach((bar, i) => {
+          const x = i / BARS;
+          const shape = Math.sin(time * .004 + i * .58) * 0.5 + 0.5;
+          const shape2 = Math.sin(time * .007 - i * .31) * 0.5 + 0.5;
+          const center = 1 - Math.min(1, Math.abs(x - .5) * 1.8);
+          const h = (8 + (shape * .52 + shape2 * .28 + center * .2) * 78) * volume;
+          bar.style.height = Math.max(5, Math.min(96, h)) + "%";
         });
-    }
+      }
 
-    requestAnimationFrame(animateWave);
-}
-animateWave();
+      function drawWave(time) {
+        if (playing && analyserReady && analyser) {
+          try {
+            analyser.getByteFrequencyData(analyserData);
 
-/* Solo Instagram, WhatsApp y Compartir */
-instagramBtn.addEventListener("click",()=>{
-    window.open(INSTAGRAM_URL,"_blank","noopener,noreferrer");
-});
-whatsappBtn.addEventListener("click",()=>{
-    window.open(WHATSAPP_URL,"_blank","noopener,noreferrer");
-});
-
-const shareBtn=document.getElementById("shareBtn");
-shareBtn.addEventListener("click",async()=>{
-    const shareData={
-        title:"Fusión Stereo — En Vivo",
-        text:"🎶 Escucha Fusión Stereo — Emisora Virtual. Señal desde Medellín, Colombia.",
-        url:window.location.href
-    };
-
-    try{
-        if(navigator.share){
-            await navigator.share(shareData);
-        }else if(navigator.clipboard){
-            await navigator.clipboard.writeText(window.location.href);
-            alert("Enlace de Fusión Stereo copiado. Ya puedes compartirlo.");
-        }else{
-            prompt("Copia este enlace para compartir Fusión Stereo:",window.location.href);
+            bars.forEach((bar, i) => {
+              const idx = Math.floor((i / BARS) * analyserData.length);
+              const value = analyserData[idx] || 0;
+              const h = 6 + (value / 255) * 88;
+              bar.style.height = h + "%";
+            });
+          } catch (error) {
+            analyserReady = false;
+            fallbackWave(time);
+          }
+        } else {
+          fallbackWave(time);
         }
-    }catch(error){
-        if(error.name!=="AbortError") console.error("Error al compartir:",error);
-    }
-});
 
-/* PWA */
-let deferredPrompt=null;
-window.addEventListener("beforeinstallprompt",(event)=>{
-    event.preventDefault();
-    deferredPrompt=event;
-    pwaBtn.hidden=false;
-});
-pwaBtn.addEventListener("click",async()=>{
-    if(!deferredPrompt) return;
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt=null;
-    pwaBtn.hidden=true;
-});
-window.addEventListener("appinstalled",()=>{
-    deferredPrompt=null;
-    pwaBtn.hidden=true;
-});
+        animationFrame = requestAnimationFrame(drawWave);
+      }
 
-/* Service Worker */
-if("serviceWorker" in navigator){
-    window.addEventListener("load",()=>{
-        navigator.serviceWorker.register("./service-worker.js")
-            .catch(error=>console.error("Service Worker:",error));
-    });
-}
-</script>
+      async function startAudio() {
+        loading.classList.add("show");
+
+        try {
+          tryInitAnalyser();
+
+          if (audioContext && audioContext.state === "suspended") {
+            await audioContext.resume();
+          }
+
+          await audio.play();
+          setPlayingState(true);
+        } catch (error) {
+          setPlayingState(false);
+
+          let message = "No se pudo iniciar la señal. Intenta nuevamente.";
+          if (error && error.name === "NotSupportedError") {
+            message = "El navegador no admite este formato de transmisión.";
+          } else if (error && error.name === "NotAllowedError") {
+            message = "El navegador bloqueó la reproducción. Pulsa play nuevamente.";
+          }
+
+          statusText.textContent = "No fue posible conectar con la señal";
+          showToast(message);
+        } finally {
+          loading.classList.remove("show");
+        }
+      }
+
+      function stopAudio() {
+        audio.pause();
+        setPlayingState(false);
+      }
+
+      playBtn.addEventListener("click", () => {
+        if (playing) stopAudio();
+        else startAudio();
+      });
+
+      audio.addEventListener("waiting", () => {
+        if (playing) {
+          statusText.textContent = "Conectando con la señal en vivo…";
+          loading.classList.add("show");
+        }
+      });
+
+      audio.addEventListener("playing", () => {
+        loading.classList.remove("show");
+        if (playing) statusText.textContent = "Escuchando señal en vivo · Medellín, Colombia";
+      });
+
+      audio.addEventListener("stalled", () => {
+        if (playing) showToast("La señal está tardando en responder…");
+      });
+
+      audio.addEventListener("error", () => {
+        loading.classList.remove("show");
+        setPlayingState(false);
+        statusText.textContent = "Se perdió la conexión con la señal";
+        showToast("No se pudo cargar la transmisión. Revisa la conexión de internet.");
+      });
+
+      audio.addEventListener("pause", () => {
+        if (playing) setPlayingState(false);
+      });
+
+      // PWA: mostrar botón solo cuando el navegador ofrezca instalación.
+      window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        deferredInstallPrompt = event;
+        installBtn.style.display = "flex";
+      });
+
+      installBtn.addEventListener("click", async () => {
+        if (!deferredInstallPrompt) return;
+
+        deferredInstallPrompt.prompt();
+        const result = await deferredInstallPrompt.userChoice;
+
+        if (result.outcome === "accepted") {
+          showToast("Fusión Stereo se está instalando.");
+        }
+
+        deferredInstallPrompt = null;
+        installBtn.style.display = "none";
+      });
+
+      window.addEventListener("appinstalled", () => {
+        deferredInstallPrompt = null;
+        installBtn.style.display = "none";
+        showToast("Fusión Stereo quedó instalada.");
+      });
+
+      // Service worker
+      if ("serviceWorker" in navigator && location.protocol !== "file:") {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      }
+
+      drawWave(performance.now());
+    })();
+  </script>
 </body>
 </html>
