@@ -29,3 +29,8 @@ Proyecto adaptado desde el ZIP original para:
 Sube `index.html`, `manifest.webmanifest` y `service-worker.js` a la raíz de GitHub Pages o a cualquier hosting HTTPS.
 
 Después de actualizar el proyecto, si el navegador conserva una versión antigua, abre el sitio en una ventana privada o borra los datos del sitio una vez para que entre `fusion-stereo-v2`.
+
+- Diseño visual ajustado fielmente a la referencia suministrada: vinilo, portada superpuesta, barra inferior, botones circulares y distribución.
+
+- Botón Compartir añadido con Web Share API y copia de enlace como respaldo.
+- La onda intenta analizar las frecuencias reales del stream para moverse al ritmo de la música; si el servidor no permite CORS, usa un modo visual de respaldo sin afectar el audio.

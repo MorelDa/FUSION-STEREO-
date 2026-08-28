@@ -1,4 +1,4 @@
-const CACHE_NAME = "fusion-stereo-v2";
+const CACHE_NAME = "fusion-stereo-v4";
 const APP_SHELL = [
   "./",
   "./index.html",

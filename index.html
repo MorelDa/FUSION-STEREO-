@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
-<title>Fusión Stereo — Emisora Virtual desde Medellín, Colombia</title>
+<title>Fusión Stereo — En Vivo</title>
 <meta name="description" content="Fusión Stereo — Emisora Virtual. Señal desde Medellín, Colombia. Escúchanos en vivo.">
 <meta name="theme-color" content="#6514d8">
 <meta name="msapplication-TileColor" content="#6514d8">
@@ -39,305 +39,139 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-:root{
-    --brand:#6514d8;
-    --brand2:#7b22f2;
-    --brand-soft:rgba(101,20,216,.42);
-    --white:#fff;
-    --bg:#09070d;
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background-color:#0d0d0f}
+.app-container{position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.player-video-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;filter:saturate(.9)}
+.pink-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,rgba(0,0,0,.20) 0%,rgba(10,10,12,.60) 60%,rgba(10,10,12,.94) 100%);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:2}
+.ui-layer{position:relative;z-index:3;width:100%;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 15px) 20px calc(env(safe-area-inset-bottom) + 20px) 20px}
+.header-bar{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1200px;margin:0 auto}
+.top-logo{width:48px;height:48px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:50%;display:flex;justify-content:center;align-items:center;border:1.5px solid rgba(255,255,255,.35);overflow:hidden}
+.top-logo img{width:100%;height:100%;object-fit:cover;display:block}
+.pwa-action-btn{background:rgba(101,20,216,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.35);padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer}
+.pwa-action-btn[hidden]{display:none}
+.center-content{display:flex;justify-content:center;align-items:center;flex:1;position:relative;width:100%}
+.album-art-wrapper{position:relative;width:180px;height:180px;aspect-ratio:1/1}
+.vinyl-record{position:absolute;top:0;left:0;width:100%;height:100%;aspect-ratio:1/1;border-radius:50%;background:url('https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp') no-repeat center center/cover;box-shadow:0 10px 30px rgba(0,0,0,.6);transition:transform .8s cubic-bezier(.175,.885,.32,1.275);border:2px solid #000;display:flex;justify-content:center;align-items:center;will-change:transform}
+.vinyl-center-label{width:32%;height:32%;border-radius:50%;background:transparent;border:none;display:flex;justify-content:center;align-items:center;overflow:hidden;z-index:5}
+.vinyl-center-label img{width:100%;height:100%;object-fit:cover;display:block}
+.album-cover{position:absolute;top:0;left:0;width:100%;height:100%;aspect-ratio:1/1;border-radius:16px;overflow:hidden;box-shadow:0 12px 35px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.2);z-index:2;background:#1e1e22}
+.album-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.app-container.playing .album-cover{transform:translateX(75px)}
+.app-container.playing .vinyl-record{transform:translateX(75px);animation:spinVinyl 3s linear infinite}
+@keyframes spinVinyl{from{transform:translateX(75px) rotate(0deg)}to{transform:translateX(75px) rotate(360deg)}}
+.audio-wave-container{position:absolute;bottom:0;left:0;width:100%;height:35%;display:flex;align-items:flex-end;justify-content:space-between;gap:2px;z-index:2;pointer-events:none;padding:0}
+.wave-bar{flex:1;height:10%;border-radius:3px 3px 0 0;background:#fff;box-shadow:0 0 8px rgba(255,255,255,.35);transition:height .05s ease}
+.bottom-controls{width:100%;max-width:480px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:15px}
+.black-player-bar{width:100%;height:65px;background:rgba(17,17,19,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:35px;display:flex;align-items:center;padding:0 16px 0 10px;border:1px solid rgba(255,255,255,.15);box-shadow:0 8px 25px rgba(0,0,0,.5)}
+.station-avatar{width:45px;height:45px;background:#fff;border-radius:50%;margin-right:12px;overflow:hidden;flex-shrink:0}
+.station-avatar img{width:100%;height:100%;object-fit:cover}
+.track-text{flex:1;overflow:hidden}
+.track-text .title{font-weight:700;font-size:14px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track-text .subtitle{color:rgba(255,255,255,.7);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spectators-tag{background:#fff;color:#000;font-size:10px;font-weight:800;padding:5px 10px;border-radius:12px;display:flex;align-items:center;gap:5px}
+.action-controls{display:flex;width:100%;justify-content:space-around;align-items:center}
+.btn-action-play{width:68px;height:68px;background:#fff;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:26px;color:#6514d8;border:none;box-shadow:0 6px 20px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s ease}
+.btn-action-play:active{transform:scale(.92)}
+.btn-action-secondary{width:50px;height:50px;background:rgba(17,17,19,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:50%;color:#fff;display:flex;justify-content:center;align-items:center;font-size:18px;border:1px solid rgba(255,255,255,.15);cursor:pointer}
+.btn-action-secondary .fa-whatsapp{color:#25D366}
+.btn-action-secondary .fa-instagram{color:#fff}
+@media (min-width:768px){
+.album-art-wrapper{width:280px;height:280px}
+.app-container.playing .album-cover{transform:translateX(110px)}
+.app-container.playing .vinyl-record{transform:translateX(110px)}
+@keyframes spinVinyl{from{transform:translateX(110px) rotate(0deg)}to{transform:translateX(110px) rotate(360deg)}}
+.black-player-bar{height:75px}
+.station-avatar{width:52px;height:52px}
+.track-text .title{font-size:16px}
+.btn-action-play{width:78px;height:78px;font-size:30px}
+.btn-action-secondary{width:58px;height:58px;font-size:20px}
 }
-*{
-    margin:0;padding:0;box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    -webkit-tap-highlight-color:transparent;
-}
-html,body{
-    width:100%;height:100%;overflow:hidden;background:var(--bg);color:#fff;
-}
-button{font:inherit}
-.app-container{
-    position:relative;width:100vw;height:100vh;height:100dvh;overflow:hidden;
-    display:flex;flex-direction:column;justify-content:space-between;
-    isolation:isolate;
-}
-.background-logo{
-    position:absolute;inset:-12%;
-    width:124%;height:124%;object-fit:cover;
-    filter:blur(28px) saturate(1.15);
-    opacity:.28;
-    transform:scale(1.05);
-    z-index:-3;
-}
-.background-overlay{
-    position:absolute;inset:0;z-index:-2;
-    background:
-      radial-gradient(circle at 50% 38%, rgba(101,20,216,.30), transparent 42%),
-      linear-gradient(180deg,rgba(7,5,12,.34),rgba(7,5,12,.84) 70%,rgba(7,5,12,.98));
-}
-.noise{
-    position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.07;
-    background-image:radial-gradient(rgba(255,255,255,.8) .5px,transparent .5px);
-    background-size:5px 5px;
-}
-.ui-layer{
-    position:relative;width:100%;height:100%;
-    display:flex;flex-direction:column;justify-content:space-between;
-    padding:calc(env(safe-area-inset-top) + 15px) 20px calc(env(safe-area-inset-bottom) + 20px);
-}
-.header-bar{
-    width:100%;max-width:1200px;margin:0 auto;
-    display:flex;align-items:center;justify-content:space-between;
-}
-.top-logo{
-    width:54px;height:54px;border-radius:50%;overflow:hidden;
-    border:1px solid rgba(255,255,255,.35);
-    background:rgba(255,255,255,.10);
-    box-shadow:0 8px 30px rgba(0,0,0,.35),0 0 25px var(--brand-soft);
-    backdrop-filter:blur(10px);
-}
-.top-logo img,.station-avatar img,.album-cover img{
-    width:100%;height:100%;object-fit:cover;display:block;
-}
-.pwa-action-btn{
-    display:none;align-items:center;gap:8px;
-    color:#fff;background:rgba(101,20,216,.35);
-    border:1px solid rgba(255,255,255,.28);
-    border-radius:22px;padding:9px 15px;font-size:12px;font-weight:700;
-    cursor:pointer;backdrop-filter:blur(10px);
-}
-.pwa-action-btn:not([hidden]){display:flex}
-.center-content{
-    flex:1;display:flex;justify-content:center;align-items:center;
-    position:relative;width:100%;
-}
-.album-art-wrapper{
-    position:relative;width:190px;height:190px;aspect-ratio:1/1;
-}
-.vinyl-record{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    aspect-ratio:1/1;
-    border-radius:50%;
-    background:url("https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp") no-repeat center center/cover;
-    box-shadow:0 10px 30px rgba(0,0,0,.6);
-    transition:transform .8s cubic-bezier(.175,.885,.32,1.275);
-    border:2px solid rgba(0,0,0,.8);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    will-change:transform;
-}
-.vinyl-center-label{
-    width:32%;
-    height:32%;
-    border-radius:50%;
-    background:transparent;
-    border:none;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    z-index:5;
-}
-.vinyl-center-label img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
-.album-cover{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    aspect-ratio:1/1;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 12px 35px rgba(0,0,0,.6);
-    border:1px solid rgba(255,255,255,.2);
-    z-index:2;
-    background:#1e1e22;
-}
-.album-cover img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-.app-container.playing .album-cover{
-    transform:translateX(75px);
-}
-.app-container.playing .vinyl-record{
-    transform:translateX(75px);
-    animation:spinVinyl 3s linear infinite;
-}
-@keyframes spinVinyl{
-    from{transform:translateX(75px) rotate(0deg)}
-    to{transform:translateX(75px) rotate(360deg)}
-}
-
-.audio-wave-container{
-    position:absolute;left:0;bottom:0;width:100%;height:34%;
-    display:flex;align-items:flex-end;justify-content:space-between;gap:2px;
-    z-index:1;pointer-events:none;padding:0;
-    mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,.8) 60%,transparent 100%);
-}
-.wave-bar{
-    flex:1;min-width:2px;height:8%;border-radius:4px 4px 0 0;
-    background:#fff;box-shadow:0 0 8px rgba(255,255,255,.28);
-    transform-origin:bottom;transition:height .08s linear;
-}
-.bottom-controls{
-    width:100%;max-width:500px;margin:0 auto;display:flex;
-    flex-direction:column;align-items:center;gap:14px;position:relative;z-index:5;
-}
-.black-player-bar{
-    width:100%;min-height:70px;background:rgba(13,11,18,.80);
-    backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
-    border-radius:36px;display:flex;align-items:center;padding:10px 14px 10px 10px;
-    border:1px solid rgba(255,255,255,.15);
-    box-shadow:0 10px 30px rgba(0,0,0,.48);
-}
-.station-avatar{
-    width:49px;height:49px;border-radius:50%;overflow:hidden;flex-shrink:0;
-    margin-right:12px;background:#fff;border:2px solid var(--brand);
-}
-.track-text{flex:1;min-width:0}
-.track-text .title{
-    color:#fff;font-weight:800;font-size:14px;white-space:nowrap;
-    overflow:hidden;text-overflow:ellipsis;
-}
-.track-text .subtitle{
-    color:rgba(255,255,255,.68);font-size:11px;margin-top:3px;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.status-tag{
-    color:#fff;font-size:9px;font-weight:900;letter-spacing:.5px;
-    padding:6px 9px;border-radius:13px;border:1px solid rgba(255,255,255,.16);
-    background:rgba(101,20,216,.45);white-space:nowrap;
-}
-.action-controls{
-    width:100%;display:flex;justify-content:center;align-items:center;gap:25px;
-}
-.btn-action-play{
-    width:72px;height:72px;border-radius:50%;border:2px solid rgba(255,255,255,.7);
-    background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;
-    font-size:27px;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.45),0 0 28px var(--brand-soft);
-    transition:transform .18s ease,background .18s ease;
-}
-.btn-action-play:active{transform:scale(.91)}
-.btn-action-secondary{
-    width:52px;height:52px;border-radius:50%;
-    background:rgba(13,11,18,.82);color:#fff;
-    display:flex;align-items:center;justify-content:center;
-    border:1px solid rgba(255,255,255,.18);font-size:20px;cursor:pointer;
-    backdrop-filter:blur(10px);transition:transform .18s ease,background .18s ease;
-}
-.btn-action-secondary:active{transform:scale(.92)}
-.instagram-icon{color:#fff}
-.whatsapp-icon{color:#25D366}
-.connection{
-    position:absolute;left:50%;bottom:104px;transform:translateX(-50%);
-    font-size:10px;color:rgba(255,255,255,.68);white-space:nowrap;
-    opacity:0;transition:opacity .25s;
-}
-.connection.show{opacity:1}
-@media(min-width:768px){
-    .album-art-wrapper{width:280px;height:280px}
-    .app-container.playing .album-cover{transform:translateX(110px)}
-    .app-container.playing .vinyl-record{
-        transform:translateX(110px);
-        animation:spinVinyl 3s linear infinite;
-    }
-    @keyframes spinVinyl{
-      from{transform:translateX(110px) rotate(0deg)}
-      to{transform:translateX(110px) rotate(360deg)}
-    }
-    .black-player-bar{min-height:78px}
-    .station-avatar{width:54px;height:54px}
-    .track-text .title{font-size:16px}
-    .btn-action-play{width:80px;height:80px;font-size:30px}
-    .btn-action-secondary{width:58px;height:58px}
-}
-@media(max-height:650px){
-    .album-art-wrapper{width:155px;height:155px}
-    .ui-layer{padding-top:10px}
-    .bottom-controls{gap:8px}
-    .black-player-bar{min-height:58px}
-    .station-avatar{width:40px;height:40px}
-}
+@media(max-height:650px){.album-art-wrapper{width:155px;height:155px}}
 </style>
 </head>
 <body>
-
 <div class="app-container" id="mainContainer">
-    <img class="background-logo" src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="" aria-hidden="true">
-    <div class="background-overlay"></div>
-    <div class="noise"></div>
+
+    <img class="player-video-bg" src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="" aria-hidden="true">
+
+    <div class="pink-overlay"></div>
 
     <div class="audio-wave-container" id="wave-container"></div>
 
     <div class="ui-layer">
+
         <div class="header-bar">
             <div class="top-logo">
                 <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
             </div>
-            <button class="pwa-action-btn" id="pwaBtn" type="button">
-                <i class="fa-solid fa-download"></i><span>Instalar App</span>
+
+            <button class="pwa-action-btn" id="pwaBtn" type="button" hidden>
+                <i class="fa-solid fa-download"></i>
+                <span>Instalar App</span>
             </button>
         </div>
 
         <div class="center-content">
             <div class="album-art-wrapper">
-                <div class="live-badge"><span class="live-dot"></span>EN VIVO</div>
 
-                <div class="vinyl-record" aria-hidden="true">
+                <div class="vinyl-record">
                     <div class="vinyl-center-label">
-                        <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="">
+                        <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Centro Vinilo">
                     </div>
                 </div>
 
                 <div class="album-cover">
-                    <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo — Emisora Virtual">
+                    <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
                 </div>
+
             </div>
         </div>
 
         <div class="bottom-controls">
+
             <div class="black-player-bar">
                 <div class="station-avatar">
                     <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Fusión Stereo">
                 </div>
+
                 <div class="track-text">
                     <div class="title">FUSIÓN STEREO</div>
                     <div class="subtitle">Emisora Virtual · Señal desde Medellín, Colombia</div>
                 </div>
-                <div class="status-tag" id="statusTag">OFFLINE</div>
+
+                <div class="spectators-tag">
+                    <i class="fa-solid fa-tower-broadcast"></i>
+                </div>
             </div>
 
             <div class="action-controls">
-                <button class="btn-action-secondary" id="instagramBtn" type="button" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram instagram-icon"></i>
+
+                <button class="btn-action-secondary" type="button" id="instagramBtn" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
                 </button>
 
                 <button class="btn-action-play" id="playBtn" type="button" aria-label="Reproducir">
                     <i class="fa-solid fa-play" id="playIcon"></i>
                 </button>
 
-                <button class="btn-action-secondary" id="whatsappBtn" type="button" aria-label="WhatsApp">
-                    <i class="fa-brands fa-whatsapp whatsapp-icon"></i>
+                <button class="btn-action-secondary" type="button" id="whatsappBtn" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
                 </button>
+
+                <button class="btn-action-secondary" type="button" id="shareBtn" aria-label="Compartir">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+
             </div>
         </div>
 
-        <div class="connection" id="connectionMsg">Conectando con Fusión Stereo…</div>
     </div>
 </div>
 
 <script>
+const STREAM_URL = "https://radios.voiparkas.com/listen/fusionstereo/radio.mp3";
+const INSTAGRAM_URL = "https://www.instagram.com/emisorafusionstereo?igsi=<script>
 const STREAM_URL = "https://radios.voiparkas.com/listen/fusionstereo/radio.mp3";
 const INSTAGRAM_URL = "https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg==";
 const WHATSAPP_URL = "https://wa.me/573117679576";
@@ -347,231 +181,242 @@ audio.preload = "none";
 audio.autoplay = false;
 audio.playsInline = true;
 
-const mainContainer = document.getElementById("mainContainer");
 const playBtn = document.getElementById("playBtn");
 const playIcon = document.getElementById("playIcon");
-const statusTag = document.getElementById("statusTag");
-const connectionMsg = document.getElementById("connectionMsg");
+const mainContainer = document.getElementById("mainContainer");
 const waveContainer = document.getElementById("wave-container");
+const pwaBtn = document.getElementById("pwaBtn");
 const instagramBtn = document.getElementById("instagramBtn");
 const whatsappBtn = document.getElementById("whatsappBtn");
-const pwaBtn = document.getElementById("pwaBtn");
 
-const BARS_COUNT = 46;
-const bars = [];
+const BARS_COUNT = 32;
+const barElements = [];
 
 for(let i=0;i<BARS_COUNT;i++){
-    const bar = document.createElement("div");
-    bar.className = "wave-bar";
+    const bar=document.createElement("div");
+    bar.className="wave-bar";
     waveContainer.appendChild(bar);
-    bars.push(bar);
+    barElements.push(bar);
 }
 
-let playing = false;
-let reconnectTimer = null;
-let heartbeatTimer = null;
-let lastTime = -1;
-let stalledCount = 0;
-
-function setStatus(text, live=false){
-    statusTag.textContent = text;
-    statusTag.style.background = live ? "rgba(101,20,216,.72)" : "rgba(80,75,90,.55)";
-}
-
-function showConnection(message){
-    connectionMsg.textContent = message;
-    connectionMsg.classList.add("show");
-    clearTimeout(showConnection.timer);
-    showConnection.timer = setTimeout(()=>connectionMsg.classList.remove("show"), 2600);
-}
-
-function updateUI(isPlaying){
-    playing = isPlaying;
-    if(isPlaying){
-        playIcon.className = "fa-solid fa-pause";
-        playBtn.setAttribute("aria-label","Pausar");
-        mainContainer.classList.add("playing");
-        setStatus("EN VIVO",true);
-    }else{
-        playIcon.className = "fa-solid fa-play";
-        playBtn.setAttribute("aria-label","Reproducir");
-        mainContainer.classList.remove("playing");
-        setStatus("OFFLINE",false);
-    }
-}
+let playing=false;
+let reconnectTimer=null;
+let lastTime=-1;
+let stalledChecks=0;
 
 function streamSource(){
-    // Evita que una caché intermedia entregue un fragmento viejo del stream.
     return STREAM_URL + (STREAM_URL.includes("?") ? "&" : "?") + "t=" + Date.now();
+}
+
+function setPlayingState(value){
+    playing=value;
+    playIcon.className=value ? "fa-solid fa-pause" : "fa-solid fa-play";
+    mainContainer.classList.toggle("playing",value);
 }
 
 async function connectStream(){
     clearTimeout(reconnectTimer);
-    showConnection("Conectando con Fusión Stereo…");
-    setStatus("CONECTANDO",false);
-
     try{
+        initAudioAnalyser();
+        if(audioContext && audioContext.state==="suspended"){
+            await audioContext.resume();
+        }
         audio.pause();
-        audio.src = streamSource();
+        audio.src=streamSource();
         audio.load();
         await audio.play();
-        updateUI(true);
-        stalledCount = 0;
+        setPlayingState(true);
+        stalledChecks=0;
     }catch(error){
-        console.error("No se pudo reproducir el stream:", error);
-        updateUI(false);
-        scheduleReconnect();
+        console.error("Error reproduciendo Fusión Stereo:",error);
+        setPlayingState(false);
     }
 }
 
 function scheduleReconnect(){
-    if(!playing && stalledCount === 0) return;
+    if(!playing) return;
     clearTimeout(reconnectTimer);
-    const delay = Math.min(15000, 1800 + stalledCount * 1200);
-    reconnectTimer = setTimeout(async()=>{
-        stalledCount++;
+    reconnectTimer=setTimeout(async()=>{
+        if(!playing) return;
         try{
+            initAudioAnalyser();
+            if(audioContext && audioContext.state==="suspended"){
+                await audioContext.resume();
+            }
             audio.pause();
-            audio.src = streamSource();
+            audio.src=streamSource();
             audio.load();
             await audio.play();
-            updateUI(true);
-            stalledCount = 0;
-        }catch(e){
-            console.error("Reintento fallido:",e);
+            stalledChecks=0;
+            setPlayingState(true);
+        }catch(error){
+            stalledChecks++;
             scheduleReconnect();
         }
-    },delay);
+    },Math.min(12000,1500+(stalledChecks*1200)));
 }
 
-playBtn.addEventListener("click", async()=>{
+playBtn.addEventListener("click",async()=>{
     if(!playing){
-        stalledCount = 0;
         await connectStream();
     }else{
         clearTimeout(reconnectTimer);
         audio.pause();
-        updateUI(false);
+        setPlayingState(false);
     }
 });
 
 audio.addEventListener("playing",()=>{
-    updateUI(true);
-    stalledCount = 0;
+    stalledChecks=0;
+    setPlayingState(true);
 });
-
-audio.addEventListener("pause",()=>{
-    if(playing) updateUI(false);
-});
-
 audio.addEventListener("waiting",()=>{
-    if(playing){
-        showConnection("Reconectando señal…");
-        setStatus("BUFFER",false);
-        scheduleReconnect();
-    }
+    if(playing) scheduleReconnect();
 });
-
 audio.addEventListener("stalled",()=>{
-    if(playing){
-        showConnection("Señal detenida — reconectando…");
-        setStatus("RECONECTANDO",false);
-        scheduleReconnect();
-    }
+    if(playing) scheduleReconnect();
 });
-
 audio.addEventListener("error",()=>{
-    if(playing){
-        showConnection("Problema de señal — reintentando…");
-        setStatus("ERROR",false);
-        scheduleReconnect();
-    }
+    if(playing) scheduleReconnect();
 });
-
 audio.addEventListener("ended",()=>{
     if(playing) scheduleReconnect();
 });
 
-/*
- * Heartbeat: si el navegador deja de avanzar el stream durante varios ciclos,
- * fuerza una reconexión. Esto ayuda con streams que quedan "congelados".
- */
-heartbeatTimer = setInterval(()=>{
+/* Detección de stream congelado sin Web Audio/CORS */
+setInterval(()=>{
     if(!playing) return;
-    const current = audio.currentTime;
-    if(Number.isFinite(current) && current === lastTime){
-        stalledCount++;
-        if(stalledCount >= 2){
-            showConnection("La señal no avanza — reconectando…");
-            scheduleReconnect();
-        }
+    const current=audio.currentTime;
+    if(Number.isFinite(current) && current===lastTime){
+        stalledChecks++;
+        if(stalledChecks>=2) scheduleReconnect();
     }else{
-        stalledCount = 0;
+        stalledChecks=0;
     }
-    lastTime = current;
+    lastTime=current;
 },12000);
 
-/* Onda visual ligera. No usa Web Audio/CORS, por lo que no puede silenciar
-   ni congelar el stream cuando el servidor no permite análisis CORS. */
-let wavePhase = 0;
+/* Onda visual: sigue el ritmo real del stream mediante Web Audio.
+   crossOrigin se configura ANTES de asignar el src. Si el servidor no permite
+   CORS, se conserva una animación de respaldo para no romper el reproductor. */
+let audioContext=null;
+let analyser=null;
+let sourceNode=null;
+let dataArray=null;
+let analyserReady=false;
+let fallbackPhase=0;
+
+function initAudioAnalyser(){
+    if(analyserReady) return true;
+
+    try{
+        audio.crossOrigin="anonymous";
+        audioContext=new (window.AudioContext || window.webkitAudioContext)();
+        analyser=audioContext.createAnalyser();
+        analyser.fftSize=128;
+        analyser.smoothingTimeConstant=.72;
+
+        sourceNode=audioContext.createMediaElementSource(audio);
+        sourceNode.connect(analyser);
+        analyser.connect(audioContext.destination);
+
+        dataArray=new Uint8Array(analyser.frequencyBinCount);
+        analyserReady=true;
+        return true;
+    }catch(error){
+        console.warn("Analizador de audio no disponible; usando onda de respaldo.",error);
+        analyserReady=false;
+        return false;
+    }
+}
+
 function animateWave(){
-    wavePhase += playing ? 0.16 : 0.035;
-    bars.forEach((bar,i)=>{
-        const centerDistance = Math.abs(i - (BARS_COUNT-1)/2) / ((BARS_COUNT-1)/2);
-        const envelope = 1 - centerDistance * .62;
-        const motion = playing
-            ? (Math.sin(wavePhase + i*.72) + Math.sin(wavePhase*1.7 + i*.31)*.45 + 1.45) / 2.9
-            : .08;
-        const height = Math.max(7, Math.min(92, 8 + motion*72*envelope));
-        bar.style.height = height + "%";
-    });
+    if(playing && analyserReady && analyser && dataArray){
+        analyser.getByteFrequencyData(dataArray);
+
+        for(let i=0;i<BARS_COUNT;i++){
+            // Mapea las barras a frecuencias bajas/medias/altas.
+            const ratio=i/(BARS_COUNT-1);
+            const bin=Math.min(dataArray.length-1,Math.floor(ratio*(dataArray.length-1)));
+            const nearby1=dataArray[Math.max(0,bin-1)] || 0;
+            const nearby2=dataArray[bin] || 0;
+            const nearby3=dataArray[Math.min(dataArray.length-1,bin+1)] || 0;
+            const level=(nearby1*.2+nearby2*.6+nearby3*.2)/255;
+
+            const center=1-Math.abs(i-(BARS_COUNT-1)/2)/((BARS_COUNT-1)/2);
+            const height=Math.max(10,Math.min(100,10+level*90*(.62+.38*center)));
+            barElements[i].style.height=height+"%";
+        }
+    }else{
+        // Fallback visual cuando el navegador/servidor no permite analizar CORS.
+        fallbackPhase+=playing?.13:.025;
+        barElements.forEach((bar,index)=>{
+            const center=1-Math.abs(index-(BARS_COUNT-1)/2)/((BARS_COUNT-1)/2);
+            const movement=playing ? (Math.sin(fallbackPhase+index*.65)+1)/2 : 0;
+            bar.style.height=Math.max(10,8+movement*78*center)+"%";
+        });
+    }
+
     requestAnimationFrame(animateWave);
 }
 animateWave();
 
-/* Redes sociales: solo Instagram y WhatsApp */
-instagramBtn.addEventListener("click",()=>window.open(INSTAGRAM_URL,"_blank","noopener,noreferrer"));
-whatsappBtn.addEventListener("click",()=>window.open(WHATSAPP_URL,"_blank","noopener,noreferrer"));
+/* Solo Instagram, WhatsApp y Compartir */
+instagramBtn.addEventListener("click",()=>{
+    window.open(INSTAGRAM_URL,"_blank","noopener,noreferrer");
+});
+whatsappBtn.addEventListener("click",()=>{
+    window.open(WHATSAPP_URL,"_blank","noopener,noreferrer");
+});
+
+const shareBtn=document.getElementById("shareBtn");
+shareBtn.addEventListener("click",async()=>{
+    const shareData={
+        title:"Fusión Stereo — En Vivo",
+        text:"🎶 Escucha Fusión Stereo — Emisora Virtual. Señal desde Medellín, Colombia.",
+        url:window.location.href
+    };
+
+    try{
+        if(navigator.share){
+            await navigator.share(shareData);
+        }else if(navigator.clipboard){
+            await navigator.clipboard.writeText(window.location.href);
+            alert("Enlace de Fusión Stereo copiado. Ya puedes compartirlo.");
+        }else{
+            prompt("Copia este enlace para compartir Fusión Stereo:",window.location.href);
+        }
+    }catch(error){
+        if(error.name!=="AbortError") console.error("Error al compartir:",error);
+    }
+});
 
 /* PWA */
-let deferredPrompt = null;
-pwaBtn.hidden = true;
-
+let deferredPrompt=null;
 window.addEventListener("beforeinstallprompt",(event)=>{
     event.preventDefault();
-    deferredPrompt = event;
-    pwaBtn.hidden = false;
+    deferredPrompt=event;
+    pwaBtn.hidden=false;
 });
 pwaBtn.addEventListener("click",async()=>{
-    if(!deferredPrompt){
-        alert("En iPhone: Compartir → Añadir a pantalla de inicio. En Android, usa el menú del navegador si no aparece el botón.");
-        return;
-    }
+    if(!deferredPrompt) return;
     deferredPrompt.prompt();
     await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    pwaBtn.hidden = true;
+    deferredPrompt=null;
+    pwaBtn.hidden=true;
 });
 window.addEventListener("appinstalled",()=>{
-    deferredPrompt = null;
-    pwaBtn.hidden = true;
+    deferredPrompt=null;
+    pwaBtn.hidden=true;
 });
 
-/* Registrar service worker */
+/* Service Worker */
 if("serviceWorker" in navigator){
     window.addEventListener("load",()=>{
         navigator.serviceWorker.register("./service-worker.js")
             .catch(error=>console.error("Service Worker:",error));
     });
 }
-
-/* Al volver a la pestaña, si estaba reproduciendo y el stream quedó detenido,
-   intenta recuperarlo sin que el usuario tenga que pulsar Play otra vez. */
-document.addEventListener("visibilitychange",()=>{
-    if(!document.hidden && playing && audio.paused){
-        scheduleReconnect();
-    }
-});
 </script>
 </body>
 </html>
