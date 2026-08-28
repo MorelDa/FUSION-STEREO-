@@ -1,4 +1,4 @@
-const CACHE = "radio-fusion-stereo-v3";
+const CACHE = "radio-fusion-stereo-v4";
 const SHELL = ["./", "./index.html", "./manifest.json", "./service-worker.js"];
 
 self.addEventListener("install", e => {

@@ -16,7 +16,7 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: #0b0b0d;
+  background-color: #46098e;
 }
 
 /* CONTENEDOR PRINCIPAL TOTALMENTE RESPONSIVE (100% PANTALLA PC Y MÓVIL) */
@@ -60,26 +60,26 @@ html, body {
 }
 
 .top-logo {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1.5px solid rgba(255, 255, 255, 0.4);
-  overflow: hidden;
+   width: 48px;
+   height: 48px;
+   background: transparent;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   overflow: hidden;
+   flex-shrink: 0;
 }
 
 .top-logo img {
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   display: block;
 }
 
 .pwa-action-btn {
+   color: #ffffff;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -307,6 +307,7 @@ html, body {
 }
 
 .btn-action-secondary {
+   color: #ffffff;
   width: 50px;
   height: 50px;
   background: rgba(17, 17, 19, 0.85);
@@ -358,21 +359,33 @@ html, body {
   }
 
   .btn-action-secondary {
+   color: #ffffff;
     width: 58px;
     height: 58px;
     font-size: 20px;
   }
 }
 
-.app-container{
-  background:
-    linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.58)),
-    url('https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp') center/cover no-repeat;
+.app-container{ background: #46098e; }
+
+
+:root {
+  color-scheme: dark;
+  --radio-purple: #46098e;
+}
+html, body {
+  background: var(--radio-purple) !important;
+  overscroll-behavior: none;
+}
+@media (display-mode: standalone) {
+  html, body {
+    background: var(--radio-purple) !important;
+  }
 }
 
 </style>
 
-<meta name="theme-color" content="#0b0b0d">
+<meta name="theme-color" content="#46098e">
 <meta name="description" content="Radio Fusión Stereo - Radio online en vivo.">
 <meta property="og:title" content="RADIO FUSIÓN STEREO">
 <meta property="og:description" content="Radio Fusión Stereo - Radio online en vivo.">
@@ -383,6 +396,7 @@ html, body {
 <meta name="twitter:title" content="RADIO FUSIÓN STEREO">
 <meta name="twitter:description" content="Radio Fusión Stereo - Radio online en vivo.">
 <meta name="twitter:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+<!-- FAVICON: LOGO REAL DE RADIO FUSIÓN STEREO -->
 <link rel="icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" type="image/webp">
 <link rel="shortcut icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" type="image/webp">
 <link rel="apple-touch-icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
@@ -444,10 +458,10 @@ html, body {
           <i class="fa-solid fa-play" id="playIcon"></i>
         </button>
         <button class="btn-action-secondary" onclick="window.open('https://wa.me/+573117679576')">
-          <i class="fa-brands fa-whatsapp"></i>
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
         </button>
         <button class="btn-action-secondary" onclick="window.open('https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg%3D%3D')">
-          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-instagram" aria-hidden="true"></i>
         </button>
         <button class="btn-action-secondary" onclick="window.open('https://www.facebook.com/')">
           <i class="fa-brands fa-facebook"></i>
