@@ -13,11 +13,10 @@
 }
 
 html, body {
-   width: 100%;
-   height: 100%;
-   overflow: hidden;
-   background: #46098e !important;
-   color-scheme: dark;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #46098e;
 }
 
 /* CONTENEDOR PRINCIPAL TOTALMENTE RESPONSIVE (100% PANTALLA PC Y MÓVIL) */
@@ -70,7 +69,6 @@ html, body {
    justify-content: center;
    align-items: center;
    overflow: hidden;
-   border: 1.5px solid rgba(255,255,255,.55);
    flex-shrink: 0;
 }
 
@@ -366,26 +364,31 @@ html, body {
   }
 }
 
-.inline-icon {
-   width: 20px;
-   height: 20px;
-   display: block;
-   flex: 0 0 auto;
+/* ICONOS VISIBLES — no ocultar */
+.btn-action-secondary i,
+.social-actions i,
+.pwa-action-btn i,
+.btn-action-play i {
+   display: inline-block !important;
+   visibility: visible !important;
+   opacity: 1 !important;
 }
-.pwa-action-btn .inline-icon { width: 16px; height: 16px; }
-.btn-action-secondary .inline-icon { width: 22px; height: 22px; }
+.btn-action-secondary i { font-size: 20px !important; }
+.social-actions .btn-action-secondary i { font-size: 20px !important; }
+.pwa-action-btn i { font-size: 16px !important; }
 .btn-action-play {
    background: #46098e !important;
    color: #ffffff !important;
 }
-.btn-action-play i { color: #ffffff !important; }
 
+.share-svg-icon{width:22px;height:22px;display:block;color:#fff!important;fill:none!important;}
 </style>
 
 <meta name="theme-color" content="#46098e">
+<meta name="msapplication-TileColor" content="#46098e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="msapplication-TileColor" content="#46098e">
+<meta name="apple-mobile-web-app-title" content="Radio Fusión Stereo">
 <meta name="description" content="Radio Fusión Stereo - Radio online en vivo.">
 <meta property="og:title" content="RADIO FUSIÓN STEREO">
 <meta property="og:description" content="Radio Fusión Stereo - Radio online en vivo.">
@@ -393,13 +396,12 @@ html, body {
 <meta property="og:image:url" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
 <meta property="og:image:secure_url" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://MorelDa.github.io/nuevo-pwa-para-wilmer/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="RADIO FUSIÓN STEREO">
 <meta name="twitter:description" content="Radio Fusión Stereo - Radio online en vivo.">
 <meta name="twitter:image" content="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
-<link rel="icon" type="image/webp" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
-<link rel="shortcut icon" type="image/webp" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
+<link rel="icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" type="image/webp">
+<link rel="shortcut icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" type="image/webp">
 <link rel="apple-touch-icon" href="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp">
 <link rel="manifest" href="./manifest.json">
 
@@ -408,7 +410,10 @@ html, body {
 <body>
 
 <div class="app-container" id="mainContainer">
-<!-- ECUALIZADOR DINÁMICO EN EL FONDO -->
+<!-- CAPA ROSA OVERLAY -->
+  <div class="pink-overlay"></div>
+
+  <!-- ECUALIZADOR DINÁMICO EN EL FONDO -->
   <div class="audio-wave-container" id="wave-container"></div>
 
   <!-- CAPA DE LA INTERFAZ -->
@@ -419,16 +424,10 @@ html, body {
       <div class="top-logo">
         <img src="https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp" alt="Logo">
       </div>
-      <div style="display:flex;gap:8px;align-items:center;">
-       <button class="pwa-action-btn" id="shareBtn" type="button" aria-label="Compartir">
-         <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.3 10.8 7.4-4.5M8.3 13.2l7.4 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-         <span>Compartir</span>
-       </button>
-       <button class="pwa-action-btn" id="pwaBtn" type="button" aria-label="Instalar App">
-         <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <button class="pwa-action-btn" id="pwaBtn" type="button" aria-label="Instalar App">
+         <i class="fa-solid fa-download" aria-hidden="true"></i>
          <span>Instalar App</span>
        </button>
-       </div>
     </div>
 
     <!-- SECCIÓN CENTRAL CENTRADA: CARÁTULA Y VINILO -->
@@ -470,8 +469,8 @@ html, body {
         <button class="btn-action-secondary" onclick="window.open('https://www.instagram.com/emisorafusionstereo?igsi=MWFjaGtjM2czeWNrZg%3D%3D')">
           <i class="fa-brands fa-instagram" aria-hidden="true"></i>
         </button>
-        <button class="btn-action-secondary" id="shareBtnBottom" type="button" aria-label="Compartir" title="Compartir">
-           <svg class="inline-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.3 10.8 7.4-4.5M8.3 13.2l7.4 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <button class="btn-action-secondary" id="shareBtn" type="button" aria-label="Compartir Radio Fusión Stereo" title="Compartir">
+           <svg class="share-svg-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.3 10.8 7.4-4.5M8.3 13.2l7.4 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
          </button>
       </div>
     </div>
@@ -572,28 +571,27 @@ animate();
 </script>
 
 <script>
-/* RADIO FUSIÓN STEREO — PWA */
+/* Radio Fusión Stereo PWA controls */
 let deferredInstallPrompt = null;
-const pwaBtn = document.getElementById("pwaBtn");
+const installButton = document.getElementById("pwaBtn");
+const shareButton = document.getElementById("shareBtn");
 
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
 });
 
-pwaBtn?.addEventListener("click", async () => {
+installButton?.addEventListener("click", async () => {
   if (deferredInstallPrompt) {
     deferredInstallPrompt.prompt();
     try { await deferredInstallPrompt.userChoice; } catch(e) {}
     deferredInstallPrompt = null;
-  } else if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone) {
-    alert("Radio Fusión Stereo ya está instalada.");
   } else {
     alert("Abre el menú del navegador y selecciona «Instalar aplicación» o «Añadir a pantalla de inicio».");
   }
 });
 
-async function compartirRadioFusion() {
+shareButton?.addEventListener("click", async () => {
   const data = {
     title: "RADIO FUSIÓN STEREO",
     text: "Escucha Radio Fusión Stereo en vivo.",
@@ -604,15 +602,12 @@ async function compartirRadioFusion() {
       await navigator.share(data);
     } else if (navigator.clipboard) {
       await navigator.clipboard.writeText(window.location.href);
-      alert("Enlace de Radio Fusión Stereo copiado.");
+      alert("Enlace copiado.");
     } else {
-      prompt("Copia este enlace para compartir Radio Fusión Stereo:", window.location.href);
+      prompt("Copia este enlace para compartir:", window.location.href);
     }
   } catch(e) {}
-}
-
-document.getElementById("shareBtn")?.addEventListener("click", compartirRadioFusion);
-document.getElementById("shareBtnBottom")?.addEventListener("click", compartirRadioFusion);
+});
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js"));

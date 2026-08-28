@@ -1,22 +1,11 @@
-RADIO FUSIÓN STEREO — PWA DEFINITIVA
-
-Identidad:
-- Color exacto: #46098e
-- Favicon: URL directa del logo real de Fusión Stereo
-- OG/Twitter/share image: la misma URL del logo
-- Iconos PWA: la misma URL del logo
-
-Interfaz:
-- Fondo #46098e
-- Play/Pause: botón central #46098e con icono blanco
-- Compartir: icono SVG inline, no depende de Font Awesome
-- WhatsApp e Instagram: iconos originales
-- Facebook eliminado
-- Logo superior ocupa todo el círculo
-
-Audio:
-- Wave Audio y lógica del reproductor conservados.
-
-Instalación:
-- HTTPS obligatorio para PWA instalable.
-- Si existe una PWA anterior, desinstálala/borra los datos del sitio y vuelve a instalar para cargar el Service Worker v5.
+RADIO FUSIÓN STEREO — CORREGIDA
+- Basada directamente en el HTML original.
+- Wave Audio ORIGINAL conservado.
+- Solo se elimina el vídeo de fondo.
+- Fondo exacto #46098e.
+- Un solo botón Compartir: sustituye Facebook.
+- WhatsApp e Instagram conservan sus iconos Font Awesome y CSS fuerza su visibilidad.
+- Compartir tiene además un SVG inline visible.
+- Favicon, apple-touch-icon, OG image, Twitter image y manifest icons usan exactamente:
+  https://i.ibb.co/XZ9GtdfS/Proyecto-nuevo.webp
+- theme-color/background-color: #46098e.
